@@ -20,12 +20,12 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class VoitureController extends AbstractController
 {
-    #[Route('/voiture', name: 'app_voiture', methods: ['GET'])]
+    #[Route('/voiture', name: 'app_voiture')]
     public function index(VoitureRepository $voitureRepository,ContactRepository $contactRepository, HorairesRepository $horairesRepository, Request $request, PaginatorInterface $paginator,  SluggerInterface $slugger,EntityManagerInterface $entityManager): Response
     {
         $filtreData = new FiltreData();
-        $form = $this->createForm(FiltreType::class, $filtreData);
-        $form->handleRequest($request);
+        $filtreform = $this->createForm(FiltreType::class, $filtreData);
+        $filtreform->handleRequest($request);
 
         [$prixmin, $prixmax, $kmmin, $kmmax, $anneemin, $anneemax] = $voitureRepository->findMinMax($filtreData);
 
@@ -47,48 +47,34 @@ class VoitureController extends AbstractController
         $form = $this->createForm(VoitureType::class, $voiture);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            $fichier = $form->get('fichier')->getData();
-            if ($fichier) {
-                $originalFilename = pathinfo($fichier->getClientOriginalName(), PATHINFO_FILENAME);
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $fichier->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
                 $voiture->setImage($newFilename);
             }
             $entityManager->persist($voiture);
             $entityManager->flush();
         }
 
-        return $this->render('pages/cars/carscatalogue.html.twig', [
+        return $this->render('voiture/index.html.twig', [
             'voitureForm' => $form->createView(),
             'cars' => $pagination,
             'horaires' => $horairesRepository->findBy([]),
             'voitures' => $voitureRepository->findBy([]),
             'contacts' => $contactRepository->findBy([]),
-            'form' => $form->createView(),
+            'filtreform' => $filtreform->createView(),
             'prixmin' => $prixmin,
             'prixmax' => $prixmax,
             'kmmin' => $kmmin, 
             'kmmax' => $kmmax,
-            'yearmin' => $anneemin,
-            'yearmax' => $anneemax
+            'anneemin' => $anneemin,
+            'anneemax' => $anneemax
 
         ]);
     }
 
-    #[Route('/voiture', name: 'app_voiture', methods: ['GET'])]
-    public function show(VoitureRepository $voitureRepository, HorairesRepository $horairesRepository, int $id): Response
-    {
-        $car = $voitureRepository->find($id);
-
-        if (!$car) {
-            throw $this->createNotFoundException('La voiture n\'existe pas.');
-        }
-
-        return $this->render('pages/cars/cars.html.twig', [
-            'car' => $car,
-            'horaires' => $horairesRepository->findBy([])
-        ]);
-    }
 
     #[Route('/supprimer-voiture/{id<\d+>}', name: "app_supprimer_voiture")]
     public function delete(Voiture $voiture,EntityManagerInterface $entityManager) : Response

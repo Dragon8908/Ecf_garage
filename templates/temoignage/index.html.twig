@@ -1,20 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TemoignageController!{% endblock %}
+{% block title %}Donnez votre avis{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Sylvain/Documents/ECF-final-garage/src/Controller/TemoignageController.php'|file_link(0) }}">src/Controller/TemoignageController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Sylvain/Documents/ECF-final-garage/templates/temoignage/index.html.twig'|file_link(0) }}">templates/temoignage/index.html.twig</a></code></li>
-    </ul>
+<div class="row">
+    <div class="col"></div>
+    <div class="col form-fonts">
+        <h1 class="mb-3 text-center mt-3 text-primary">Avis</h1>
+        {{ form_start(temoignageForm, {'attr': {'id': 'temoignage-form'}}) }}
+        <div class="text-primary">Nom</div>
+        {{ form_row(temoignageForm.nom) }}
+        <div class="text-primary">Commentaire</div>
+        {{ form_row(temoignageForm.commentaire) }}
+        <div class="text-primary">Note</div>
+        {{ form_row(temoignageForm.note) }}
+        <button type="submit" class="mt-3 w-100 login-btn mb-2 text-secondary">Publier</button>
+        {{ form_end(temoignageForm) }}
+      
+    </div>
+    <div class="col"></div>
+</div>  
+<div class="raw mb-0">
+    <div class="col text-primary text-center">
+    Votre avis sera modéré par un employé avant d'être publié, merci de ne pas être menaçant ou injurieux, tout avis non argumenté ne sera pas publié
+    Si tout va bien votre avis sera publié d'ici trois jours maximum sur la page d'accueil
+    </div>
 </div>
 {% endblock %}

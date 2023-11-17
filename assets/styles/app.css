@@ -158,3 +158,84 @@
 .service-card > p {
     word-wrap: break-word;
 }
+
+#carscatalogue {
+	
+	width: 100%;
+	height: 80vh;
+	background: url("../images/bradley-dunn-qijkjkJm63c-unsplash.jpg") top center;
+	background-size: cover;
+	position: relative;
+	padding: 0;
+}
+
+#carscatalogue:before {
+	content: "";
+	background: rgba(0, 0, 0, 0.8);
+	position: absolute;
+	bottom: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+
+#carscatalogue h2 {
+	color: #eee;
+	margin-bottom: 10px 0 0 0;
+	font-size: 22px;
+}
+.car-wrap {
+	margin-bottom: 40px;
+	-webkit-box-shadow: 0px 5px 12px -1px rgba(0, 0, 0, 0.06);
+	-moz-box-shadow: 0px 5px 12px -1px rgba(0, 0, 0, 0.06);
+	box-shadow: 0px 5px 12px -1px rgba(0, 0, 0, 0.06);
+	background: #fff;
+}
+
+
+.car-wrap .img {
+	width: 100%;
+	height: 220px;
+}
+
+.car-wrap .text {
+	border-top: none;
+	padding: 20px 30px 30px;
+}
+
+.car-wrap .text .price {
+	color: #1089ff;
+	margin-bottom: 0;
+	font-weight: 600;
+}
+
+.car-wrap .text .price span {
+	font-size: 12px;
+	font-weight: 400;
+	color: rgba(0, 0, 0, 0.3);
+}
+
+.car-wrap .text h2 {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.car-wrap .text h2 a {
+	color: #000000;
+}
+
+.car-wrap .text span.cat {
+	font-weight: 400;
+	color: rgba(0, 0, 0, 0.2);
+	display: block;
+	margin-bottom: 0;
+}
+
+.car-wrap .text p.d-block {
+	width: 100%;
+}
+
+.car-wrap .text p.d-block a {
+	width: 50%;
+}

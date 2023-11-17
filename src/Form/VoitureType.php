@@ -21,7 +21,7 @@ class VoitureType extends AbstractType
             ->add('prix', IntegerType::class, ['required' => true,'attr' => ['class' => 'form-control mb-3','placeholder' => 'Entrez le prix du véhicule'], 'label' => false])
             ->add('annee', IntegerType::class, ['required' => true,'attr' => ['class' => 'form-control mb-3','placeholder' => 'Entrez l\'année de mise ne circulation du véhicule'], 'label' => false])
             ->add('km', IntegerType::class, ['required' => true,'attr' => ['class' => 'form-control mb-3','placeholder' => 'Entrez le kilométrage du véhicule'], 'label' => false])
-            ->add("fichier", FileType::class,["required" => true,"data_class" => null,"constraints" => [new NotBlank(["message" => "Vous devez ajouter une image !"]),
+            ->add("image", FileType::class,["required" => true,"data_class" => null,"constraints" => [new NotBlank(["message" => "Vous devez ajouter une image !"]),
                     new File([
                         'maxSize' => "5M",
                         'mimeTypes' => [
