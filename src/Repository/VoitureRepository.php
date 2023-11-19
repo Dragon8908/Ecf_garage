@@ -49,7 +49,6 @@ class VoitureRepository extends ServiceEntityRepository
     }
 
     /**
-     * Récupère le prix min et le prix max , le kilométrage min et max et année min et max en fonction des filtres de recherche
      *
      * @param FiltreData $search
      * @return integer[]
@@ -75,7 +74,6 @@ class VoitureRepository extends ServiceEntityRepository
     }
     
     /**
-     * Construit la requête de recherche en fonction des filtres
      *
      * @param FiltreData $search
      * @param bool $ignorePrice
@@ -112,13 +110,13 @@ class VoitureRepository extends ServiceEntityRepository
         
         if (!empty($search->anneemin) && !$ignoreYear) {
             $qb = $qb
-                ->andWhere('cars.annee >= :yearmin')
+                ->andWhere('cars.annee >= :anneemin')
                 ->setParameter('anneemin', $search->anneemin);
         }
     
         if (!empty($search->anneemax) && !$ignoreYear) {
             $qb = $qb
-                ->andWhere('cars.annee <= :yearmax')
+                ->andWhere('cars.annee <= :anneemax')
                 ->setParameter('anneemax', $search->anneemax);
         }
         return $qb;

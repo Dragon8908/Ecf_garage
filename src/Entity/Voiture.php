@@ -28,9 +28,6 @@ class Voiture
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $carburant = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -92,18 +89,6 @@ class Voiture
     public function setImage(string $image): static
     {
         $this->image = $image;
-
-        return $this;
-    }
-
-    public function getCarburant(): ?string
-    {
-        return $this->carburant;
-    }
-
-    public function setCarburant(string $carburant): static
-    {
-        $this->carburant = $carburant;
 
         return $this;
     }

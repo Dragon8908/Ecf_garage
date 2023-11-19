@@ -37,7 +37,7 @@ class VoitureController extends AbstractController
 
         if ($request->get('ajax')) {
             return new JsonResponse([
-                'content' => $this->renderView('pages/cars/cars_list.html.twig', [
+                'content' => $this->renderView('voiture/index.html.twig', [
                 'cars' => $pagination
                 ])
             ]);
